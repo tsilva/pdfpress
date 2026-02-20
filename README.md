@@ -62,7 +62,7 @@ uv tool install pdfpress
 ### Install from source
 
 ```bash
-pip install git+https://github.com/tsilva/pdf-squeezer.git
+pip install git+https://github.com/tsilva/pdfpress.git
 ```
 
 ## Usage
@@ -239,7 +239,7 @@ Results vary depending on PDF content. Image-heavy PDFs typically see the larges
 
 Found a bug or have a suggestion? Please open an issue:
 
-[GitHub Issues](https://github.com/tsilva/pdf-squeezer/issues)
+[GitHub Issues](https://github.com/tsilva/pdfpress/issues)
 
 ## License
 

@@ -40,9 +40,9 @@ dev = [
 pdfpress = "pdfpress.cli:app"
 
 [project.urls]
-Homepage = "https://github.com/tsilva/pdf-squeezer"
-Repository = "https://github.com/tsilva/pdf-squeezer"
-Issues = "https://github.com/tsilva/pdf-squeezer/issues"
+Homepage = "https://github.com/tsilva/pdfpress"
+Repository = "https://github.com/tsilva/pdfpress"
+Issues = "https://github.com/tsilva/pdfpress/issues"
 
 [build-system]
 requires = ["hatchling"]
