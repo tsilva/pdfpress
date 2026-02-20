@@ -5,7 +5,7 @@ from collections.abc import Callable
 from concurrent.futures import ProcessPoolExecutor, as_completed
 from pathlib import Path
 
-from pdfsmith.core.compressor import CompressionOutcome, PDFCompressor
+from pdfpress.core.compressor import CompressionOutcome, PDFCompressor
 
 
 def _compress_single(args: tuple[Path, Path, str]) -> CompressionOutcome:

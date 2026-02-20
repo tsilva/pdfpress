@@ -1,10 +1,10 @@
 <div align="center">
-  <img src="logo.png" alt="pdfsmith" width="512"/>
+  <img src="logo.png" alt="pdfpress" width="512"/>
 
-  # pdfsmith
+  # pdfpress
 
   [![Python](https://img.shields.io/badge/Python-3.10+-blue?logo=python&logoColor=white)](https://www.python.org/)
-  [![PyPI](https://img.shields.io/pypi/v/pdfsmith?logo=pypi&logoColor=white)](https://pypi.org/project/pdfsmith/)
+  [![PyPI](https://img.shields.io/pypi/v/pdfpress?logo=pypi&logoColor=white)](https://pypi.org/project/pdfpress/)
   [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
   [![Ghostscript](https://img.shields.io/badge/Requires-Ghostscript-000000)](https://www.ghostscript.com/)
 
@@ -15,7 +15,7 @@
 
 ## Overview
 
-pdfsmith is a multi-command PDF toolkit that handles your most common PDF chores from the command line — compress bloated files, merge multiple PDFs, extract specific pages, and strip password protection.
+pdfpress is a multi-command PDF toolkit that handles your most common PDF chores from the command line — compress bloated files, merge multiple PDFs, extract specific pages, and strip password protection.
 
 ## Features
 
@@ -50,13 +50,13 @@ dnf install ghostscript
 ### Install from PyPI (recommended)
 
 ```bash
-pip install pdfsmith
+pip install pdfpress
 ```
 
 Or with uv:
 
 ```bash
-uv tool install pdfsmith
+uv tool install pdfpress
 ```
 
 ### Install from source
@@ -71,28 +71,28 @@ pip install git+https://github.com/tsilva/pdf-squeezer.git
 
 ```bash
 # Compress all PDFs in current directory
-pdfsmith compress
+pdfpress compress
 
 # Compress a single file (creates document.compressed.pdf)
-pdfsmith compress document.pdf
+pdfpress compress document.pdf
 
 # Specify output filename
-pdfsmith compress document.pdf -o small.pdf
+pdfpress compress document.pdf -o small.pdf
 
 # Batch compress to a directory
-pdfsmith compress *.pdf -d compressed/
+pdfpress compress *.pdf -d compressed/
 
 # Replace original files (use with caution)
-pdfsmith compress -i large.pdf
+pdfpress compress -i large.pdf
 
 # Use 4 parallel workers for batch compression
-pdfsmith compress *.pdf -j 4
+pdfpress compress *.pdf -j 4
 
 # Use screen quality (72 DPI) for smallest size
-pdfsmith compress document.pdf -Q screen
+pdfpress compress document.pdf -Q screen
 
 # Preview compression without saving
-pdfsmith compress --dry-run
+pdfpress compress --dry-run
 ```
 
 #### Compress Options
@@ -120,16 +120,16 @@ pdfsmith compress --dry-run
 
 ```bash
 # Merge all PDFs in a directory
-pdfsmith merge dir/
+pdfpress merge dir/
 
 # Merge specific files into one output
-pdfsmith merge f1.pdf f2.pdf -o out.pdf
+pdfpress merge f1.pdf f2.pdf -o out.pdf
 
 # Merge by filename pattern (report-1.pdf + report-2.pdf → report.merged.pdf)
-pdfsmith merge dir/ --grouped
+pdfpress merge dir/ --grouped
 
 # Ask before each group merge
-pdfsmith merge dir/ --grouped --ask
+pdfpress merge dir/ --grouped --ask
 ```
 
 #### Merge Options
@@ -145,23 +145,23 @@ pdfsmith merge dir/ --grouped --ask
 
 ```bash
 # Extract specific pages
-pdfsmith split document.pdf -p "1,3,5"
+pdfpress split document.pdf -p "1,3,5"
 
 # Extract a page range
-pdfsmith split document.pdf -p "1-5"
+pdfpress split document.pdf -p "1-5"
 
 # Extract odd or even pages
-pdfsmith split document.pdf -p "odd"
-pdfsmith split document.pdf -p "even"
+pdfpress split document.pdf -p "odd"
+pdfpress split document.pdf -p "even"
 
 # Custom output filename
-pdfsmith split document.pdf -p "1-5" -o out.pdf
+pdfpress split document.pdf -p "1-5" -o out.pdf
 
 # Export each page to a separate file
-pdfsmith split document.pdf -p "all" -i
+pdfpress split document.pdf -p "all" -i
 
 # Individual files in a specific directory
-pdfsmith split document.pdf -p "all" -i -d out/
+pdfpress split document.pdf -p "all" -i -d out/
 ```
 
 #### Split Options
@@ -178,16 +178,16 @@ pdfsmith split document.pdf -p "all" -i -d out/
 
 ```bash
 # Unlock all PDFs in a directory (prompts for password)
-pdfsmith unlock dir/
+pdfpress unlock dir/
 
 # Unlock with password flag
-pdfsmith unlock file.pdf -p "secret"
+pdfpress unlock file.pdf -p "secret"
 
 # Custom output filename
-pdfsmith unlock file.pdf -o unlocked.pdf
+pdfpress unlock file.pdf -o unlocked.pdf
 
 # Unlock to a specific directory
-pdfsmith unlock dir/ -d unlocked/
+pdfpress unlock dir/ -d unlocked/
 ```
 
 #### Unlock Options

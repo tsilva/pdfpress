@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pikepdf
 
-from pdfsmith.core.strategies.base import CompressionResult, CompressionStrategy
+from pdfpress.core.strategies.base import CompressionResult, CompressionStrategy
 
 
 class PikepdfStrategy(CompressionStrategy):

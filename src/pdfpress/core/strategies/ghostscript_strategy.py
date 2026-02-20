@@ -4,7 +4,7 @@ import shutil
 import subprocess
 from pathlib import Path
 
-from pdfsmith.core.strategies.base import CompressionResult, CompressionStrategy
+from pdfpress.core.strategies.base import CompressionResult, CompressionStrategy
 
 
 class GhostscriptStrategy(CompressionStrategy):

@@ -1,5 +1,5 @@
 [project]
-name = "pdfsmith"
+name = "pdfpress"
 dynamic = ["version"]
 description = "PDF toolkit: compress, merge, and unlock PDF files"
 readme = "README.md"
@@ -37,7 +37,7 @@ dev = [
 ]
 
 [project.scripts]
-pdfsmith = "pdfsmith.cli:app"
+pdfpress = "pdfpress.cli:app"
 
 [project.urls]
 Homepage = "https://github.com/tsilva/pdf-squeezer"
@@ -49,10 +49,10 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [tool.hatch.version]
-path = "src/pdfsmith/__init__.py"
+path = "src/pdfpress/__init__.py"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/pdfsmith"]
+packages = ["src/pdfpress"]
 
 [tool.ruff]
 line-length = 100

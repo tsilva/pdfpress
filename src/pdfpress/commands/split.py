@@ -1,4 +1,4 @@
-"""Split subcommand for pdfsmith."""
+"""Split subcommand for pdfpress."""
 
 from pathlib import Path
 from typing import Annotated
@@ -6,13 +6,13 @@ from typing import Annotated
 import typer
 from rich.progress import BarColumn, Progress, SpinnerColumn, TaskProgressColumn, TextColumn
 
-from pdfsmith.cli import console
-from pdfsmith.split.splitter import (
+from pdfpress.cli import console
+from pdfpress.split.splitter import (
     SplitResult,
     parse_page_spec,
     split_pdf,
 )
-from pdfsmith.utils.filesize import format_size
+from pdfpress.utils.filesize import format_size
 
 
 def register(app: typer.Typer) -> None:
@@ -75,15 +75,15 @@ def main(
 
     [bold]Examples:[/bold]
 
-        pdfsmith split document.pdf -p "1,3,5"           # Extract pages 1, 3, and 5
-        pdfsmith split document.pdf -p "1-5"             # Extract pages 1 through 5
-        pdfsmith split document.pdf -p "1,3,5-10,15"     # Mixed selection
-        pdfsmith split document.pdf -p "all"             # Extract all pages
-        pdfsmith split document.pdf -p "odd"             # Extract odd pages (1,3,5...)
-        pdfsmith split document.pdf -p "even"            # Extract even pages (2,4,6...)
-        pdfsmith split document.pdf -p "1-5" -o out.pdf  # Custom output filename
-        pdfsmith split document.pdf -p "all" -i          # Each page to separate file
-        pdfsmith split document.pdf -p "all" -i -d out/  # Individual files in out/
+        pdfpress split document.pdf -p "1,3,5"           # Extract pages 1, 3, and 5
+        pdfpress split document.pdf -p "1-5"             # Extract pages 1 through 5
+        pdfpress split document.pdf -p "1,3,5-10,15"     # Mixed selection
+        pdfpress split document.pdf -p "all"             # Extract all pages
+        pdfpress split document.pdf -p "odd"             # Extract odd pages (1,3,5...)
+        pdfpress split document.pdf -p "even"            # Extract even pages (2,4,6...)
+        pdfpress split document.pdf -p "1-5" -o out.pdf  # Custom output filename
+        pdfpress split document.pdf -p "all" -i          # Each page to separate file
+        pdfpress split document.pdf -p "all" -i -d out/  # Individual files in out/
     """
     # Validate input file
     if not input.exists():

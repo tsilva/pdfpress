@@ -1,6 +1,6 @@
-"""Split module for pdfsmith."""
+"""Split module for pdfpress."""
 
-from pdfsmith.split.splitter import (
+from pdfpress.split.splitter import (
     SplitIndividualResult,
     SplitResult,
     parse_page_spec,

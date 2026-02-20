@@ -1,14 +1,14 @@
-"""Command-line interface for pdfsmith."""
+"""Command-line interface for pdfpress."""
 
 from typing import Annotated
 
 import typer
 from rich.console import Console
 
-from pdfsmith import __version__
+from pdfpress import __version__
 
 app = typer.Typer(
-    name="pdfsmith",
+    name="pdfpress",
     help="PDF toolkit: compress, merge, split, and unlock PDF files.",
     add_completion=False,
     rich_markup_mode="rich",
@@ -20,7 +20,7 @@ console = Console()
 def version_callback(value: bool) -> None:
     """Show version and exit."""
     if value:
-        console.print(f"pdfsmith v{__version__}")
+        console.print(f"pdfpress v{__version__}")
         raise typer.Exit()
 
 
@@ -41,7 +41,7 @@ def _callback(
 
 
 def _register_commands() -> None:
-    from pdfsmith.commands import compress, merge, split, unlock
+    from pdfpress.commands import compress, merge, split, unlock
 
     compress.register(app)
     merge.register(app)

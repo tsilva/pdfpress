@@ -1,4 +1,4 @@
-"""Compress subcommand for pdfsmith."""
+"""Compress subcommand for pdfpress."""
 
 from pathlib import Path
 from tempfile import TemporaryDirectory
@@ -7,11 +7,11 @@ from typing import Annotated
 import typer
 from rich.progress import BarColumn, Progress, SpinnerColumn, TaskProgressColumn, TextColumn
 
-from pdfsmith.cli import console
-from pdfsmith.core.compressor import CompressionOutcome, PDFCompressor
-from pdfsmith.parallel.executor import ParallelCompressor
-from pdfsmith.utils.dependencies import check_dependencies, get_install_instructions
-from pdfsmith.utils.filesize import format_size
+from pdfpress.cli import console
+from pdfpress.core.compressor import CompressionOutcome, PDFCompressor
+from pdfpress.parallel.executor import ParallelCompressor
+from pdfpress.utils.dependencies import check_dependencies, get_install_instructions
+from pdfpress.utils.filesize import format_size
 
 
 def register(app: typer.Typer) -> None:
@@ -92,13 +92,13 @@ def main(
 
     [bold]Examples:[/bold]
 
-        pdfsmith compress                               # Compress all *.pdf in current directory
-        pdfsmith compress document.pdf                  # Creates document.compressed.pdf
-        pdfsmith compress document.pdf -o small.pdf    # Creates small.pdf
-        pdfsmith compress *.pdf -d compressed/         # Batch compress to directory
-        pdfsmith compress -i *.pdf                     # Replace original files
-        pdfsmith compress *.pdf -j 4                   # Use 4 parallel workers
-        pdfsmith compress --dry-run                    # Preview compression without saving
+        pdfpress compress                               # Compress all *.pdf in current directory
+        pdfpress compress document.pdf                  # Creates document.compressed.pdf
+        pdfpress compress document.pdf -o small.pdf    # Creates small.pdf
+        pdfpress compress *.pdf -d compressed/         # Batch compress to directory
+        pdfpress compress -i *.pdf                     # Replace original files
+        pdfpress compress *.pdf -j 4                   # Use 4 parallel workers
+        pdfpress compress --dry-run                    # Preview compression without saving
     """
     # Resolve files (handles default *.pdf pattern)
     files = _discover_pdf_files(files)

@@ -1,4 +1,4 @@
-"""Unlock subcommand for pdfsmith."""
+"""Unlock subcommand for pdfpress."""
 
 from pathlib import Path
 from typing import Annotated
@@ -7,9 +7,9 @@ import typer
 from rich.progress import BarColumn, Progress, SpinnerColumn, TaskProgressColumn, TextColumn
 from rich.prompt import Prompt
 
-from pdfsmith.cli import console
-from pdfsmith.unlock.unlocker import UnlockResult, unlock_pdf
-from pdfsmith.utils.filesize import format_size
+from pdfpress.cli import console
+from pdfpress.unlock.unlocker import UnlockResult, unlock_pdf
+from pdfpress.utils.filesize import format_size
 
 
 def register(app: typer.Typer) -> None:
@@ -64,10 +64,10 @@ def main(
 
     [bold]Examples:[/bold]
 
-        pdfsmith unlock dir/                           # Unlock all PDFs in directory
-        pdfsmith unlock file.pdf -p "secret"           # Unlock with password flag
-        pdfsmith unlock file.pdf -o unlocked.pdf       # Custom output filename
-        pdfsmith unlock dir/ -d unlocked/              # Unlock to output directory
+        pdfpress unlock dir/                           # Unlock all PDFs in directory
+        pdfpress unlock file.pdf -p "secret"           # Unlock with password flag
+        pdfpress unlock file.pdf -o unlocked.pdf       # Custom output filename
+        pdfpress unlock dir/ -d unlocked/              # Unlock to output directory
     """
     # Collect files to process
     files = _collect_files(input)

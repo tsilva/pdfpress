@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-**pdfsmith** is a multi-command PDF toolkit CLI. It compresses, merges, and unlocks PDF files. Uses Python with typer for CLI and rich for output formatting.
+**pdfpress** is a multi-command PDF toolkit CLI. It compresses, merges, and unlocks PDF files. Uses Python with typer for CLI and rich for output formatting.
 
 ## Commands
 
@@ -16,14 +16,14 @@ uv tool install .
 uv pip install -e ".[dev]"
 
 # Run the tool
-pdfsmith --help
-pdfsmith compress document.pdf
-pdfsmith compress *.pdf -j 4 -Q screen    # parallel + quality preset
-pdfsmith merge dir/                        # merge all PDFs in directory
-pdfsmith merge f1.pdf f2.pdf -o out.pdf   # merge specific files
-pdfsmith merge dir/ --grouped             # merge by filename pattern
-pdfsmith unlock dir/                       # unlock encrypted PDFs (interactive password)
-pdfsmith unlock file.pdf -p "secret"      # unlock with password flag
+pdfpress --help
+pdfpress compress document.pdf
+pdfpress compress *.pdf -j 4 -Q screen    # parallel + quality preset
+pdfpress merge dir/                        # merge all PDFs in directory
+pdfpress merge f1.pdf f2.pdf -o out.pdf   # merge specific files
+pdfpress merge dir/ --grouped             # merge by filename pattern
+pdfpress unlock dir/                       # unlock encrypted PDFs (interactive password)
+pdfpress unlock file.pdf -p "secret"      # unlock with password flag
 
 # Run tests
 pytest
@@ -72,9 +72,9 @@ Business logic in `unlock/unlocker.py`. Key functions:
 ### Package Layout
 
 ```
-src/pdfsmith/
+src/pdfpress/
     __init__.py              # v3.0.0, exports public API
-    __main__.py              # python -m pdfsmith entry point
+    __main__.py              # python -m pdfpress entry point
     cli.py                   # app definition, subcommand registration
 
     commands/

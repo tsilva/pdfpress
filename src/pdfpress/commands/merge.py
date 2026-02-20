@@ -1,4 +1,4 @@
-"""Merge subcommand for pdfsmith."""
+"""Merge subcommand for pdfpress."""
 
 from pathlib import Path
 from typing import Annotated
@@ -7,9 +7,9 @@ import typer
 from rich.progress import BarColumn, Progress, SpinnerColumn, TaskProgressColumn, TextColumn
 from rich.prompt import Confirm
 
-from pdfsmith.cli import console
-from pdfsmith.merge.merger import MergeResult, group_similar_pdfs, merge_pdfs
-from pdfsmith.utils.filesize import format_size
+from pdfpress.cli import console
+from pdfpress.merge.merger import MergeResult, group_similar_pdfs, merge_pdfs
+from pdfpress.utils.filesize import format_size
 
 
 def register(app: typer.Typer) -> None:
@@ -66,10 +66,10 @@ def main(
 
     [bold]Examples:[/bold]
 
-        pdfsmith merge dir/                            # Merge all PDFs in directory
-        pdfsmith merge f1.pdf f2.pdf -o out.pdf        # Merge specific files
-        pdfsmith merge dir/ --grouped                  # Merge by filename pattern
-        pdfsmith merge dir/ --grouped --ask            # Ask before each group merge
+        pdfpress merge dir/                            # Merge all PDFs in directory
+        pdfpress merge f1.pdf f2.pdf -o out.pdf        # Merge specific files
+        pdfpress merge dir/ --grouped                  # Merge by filename pattern
+        pdfpress merge dir/ --grouped --ask            # Ask before each group merge
     """
     # Determine mode: directory vs explicit files
     if len(input) == 1 and input[0].is_dir():

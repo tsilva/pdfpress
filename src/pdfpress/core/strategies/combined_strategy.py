@@ -3,9 +3,9 @@
 import tempfile
 from pathlib import Path
 
-from pdfsmith.core.strategies.base import CompressionResult, CompressionStrategy
-from pdfsmith.core.strategies.ghostscript_strategy import GhostscriptStrategy
-from pdfsmith.core.strategies.pikepdf_strategy import PikepdfStrategy
+from pdfpress.core.strategies.base import CompressionResult, CompressionStrategy
+from pdfpress.core.strategies.ghostscript_strategy import GhostscriptStrategy
+from pdfpress.core.strategies.pikepdf_strategy import PikepdfStrategy
 
 
 class CombinedStrategy(CompressionStrategy):
