@@ -33,6 +33,11 @@ ruff check src/
 
 # Run type checker
 mypy src/
+
+# Release (bumps version in __init__.py, commits, and pushes — triggers PyPI publish via CI)
+make release-patch   # 1.0.0 → 1.0.1
+make release-minor   # 1.0.0 → 1.1.0
+make release-major   # 1.0.0 → 2.0.0
 ```
 
 ## Architecture

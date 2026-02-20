@@ -10,6 +10,13 @@ concurrency:
   group: release
   cancel-in-progress: false
 jobs:
-  release:
-    uses: tsilva/.github/.github/workflows/release.yml@main
+  test:
+    uses: tsilva/.github/.github/workflows/test.yml@main
+
+  pii-scan:
+    uses: tsilva/.github/.github/workflows/pii-scan.yml@main
+
+  publish-pypi:
+    needs: [test, pii-scan]
+    uses: ./.github/workflows/publish-pypi.yml
     secrets: inherit
