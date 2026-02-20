@@ -1,6 +1,6 @@
 """pdfpress - PDF toolkit: compress, merge, and unlock PDF files."""
 
-__version__ = "1.0.0"
+__version__ = "1.0.1"
 __author__ = "Tiago Silva"
 
 from pdfpress.core.compressor import CompressionOutcome, PDFCompressor
