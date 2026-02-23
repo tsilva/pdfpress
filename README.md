@@ -15,6 +15,8 @@
 
 ## Overview
 
+[![CI](https://github.com/tsilva/pdfpress/actions/workflows/release.yml/badge.svg)](https://github.com/tsilva/pdfpress/actions/workflows/release.yml)
+
 pdfpress is a multi-command PDF toolkit that handles your most common PDF chores from the command line — compress bloated files, merge multiple PDFs, extract specific pages, and strip password protection.
 
 ## Features
