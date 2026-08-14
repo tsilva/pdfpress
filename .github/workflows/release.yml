@@ -6,41 +6,104 @@ on:
 concurrency:
   group: release
   cancel-in-progress: false
+permissions:
+  contents: read
+
 jobs:
   test:
-    uses: tsilva/.github/.github/workflows/test.yml@main
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: "3.12"
+      - uses: astral-sh/setup-uv@38f3f104447c67c051c4a08e39b64a148898af3a # v4
+        with:
+          cache: true
+      - run: uv sync --frozen
+      - run: uv run --frozen --with pytest pytest
 
   pii-scan:
-    uses: tsilva/.github/.github/workflows/pii-scan.yml@main
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: gitleaks/gitleaks-action@ff98106e4c7b2bc287b24eaf42907196329070c7 # v2
 
-  publish:
+  build:
     needs: [test, pii-scan]
     runs-on: ubuntu-latest
     timeout-minutes: 15
-    environment: pypi
     permissions:
-      contents: write
-      id-token: write
+      contents: read
+    outputs:
+      publish: ${{ steps.check-version.outputs.tag_exists == 'false' }}
+      tag: ${{ steps.check-version.outputs.tag }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
+          persist-credentials: false
           fetch-depth: 0
       - name: Check version
         id: check-version
-        uses: tsilva/.github/.github/actions/check-version@main
+        uses: ./.github/actions/check-version
       - name: Setup uv
         if: steps.check-version.outputs.tag_exists == 'false'
-        uses: astral-sh/setup-uv@v4
+        uses: astral-sh/setup-uv@38f3f104447c67c051c4a08e39b64a148898af3a # v4
         with:
           cache: true
       - name: Build package
         if: steps.check-version.outputs.tag_exists == 'false'
         run: uv build
-      - name: Create GitHub release
+      - name: Store package artifacts
         if: steps.check-version.outputs.tag_exists == 'false'
-        run: gh release create "${{ steps.check-version.outputs.tag }}" --title "${{ steps.check-version.outputs.tag }}" --generate-notes dist/*
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: python-package-${{ github.sha }}
+          path: dist/
+          if-no-files-found: error
+          retention-days: 1
+
+
+  release:
+    needs: [build]
+    if: needs.build.outputs.publish == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: python-package-${{ github.sha }}
+          path: dist/
+      - name: Create GitHub release
+        run: gh release create "$TAG" --title "$TAG" --generate-notes dist/*
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: ${{ needs.build.outputs.tag }}
+
+  publish:
+    needs: [build]
+    if: needs.build.outputs.publish == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: pypi
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: python-package-${{ github.sha }}
+          path: dist/
       - name: Publish to PyPI
-        if: steps.check-version.outputs.tag_exists == 'false'
-        uses: pypa/gh-action-pypi-publish@release/v1
+        uses: pypa/gh-action-pypi-publish@dc37677b2e1c63e2034f94d8a5b11f265b73ba33 # release/v1
