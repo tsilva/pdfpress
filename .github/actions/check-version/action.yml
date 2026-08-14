@@ -1,0 +1,61 @@
+name: Check Version
+description: Extract version from pyproject.toml and check if git tag exists
+
+outputs:
+  version:
+    description: Version string from pyproject.toml
+    value: ${{ steps.version.outputs.version }}
+  tag:
+    description: Git tag (v-prefixed version)
+    value: ${{ steps.version.outputs.tag }}
+  tag_exists:
+    description: Whether the tag already exists
+    value: ${{ steps.check.outputs.exists }}
+
+runs:
+  using: composite
+  steps:
+    - name: Get version
+      id: version
+      shell: bash
+      run: |
+        VERSION=$(python -c "
+        import tomllib
+        import re
+
+        with open('pyproject.toml', 'rb') as f:
+            config = tomllib.load(f)
+
+        project = config.get('project', {})
+
+        # Check for static version first
+        if 'version' in project:
+            print(project['version'])
+        # Handle dynamic version via hatchling
+        elif 'version' in project.get('dynamic', []):
+            hatch_config = config.get('tool', {}).get('hatch', {}).get('version', {})
+            version_path = hatch_config.get('path')
+            if version_path:
+                with open(version_path) as vf:
+                    content = vf.read()
+                    match = re.search(r'__version__\s*=\s*[\"\\']([^\"\\']+)[\"\\']', content)
+                    if match:
+                        print(match.group(1))
+                    else:
+                        raise ValueError(f'Could not find __version__ in {version_path}')
+            else:
+                raise ValueError('Dynamic version specified but no hatch.version.path found')
+        else:
+            raise ValueError('No version found in pyproject.toml')
+        ")
+        echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+        echo "tag=v$VERSION" >> "$GITHUB_OUTPUT"
+    - name: Check if tag exists
+      id: check
+      shell: bash
+      run: |
+        if git rev-parse "refs/tags/${{ steps.version.outputs.tag }}" >/dev/null 2>&1; then
+          echo "exists=true" >> "$GITHUB_OUTPUT"
+        else
+          echo "exists=false" >> "$GITHUB_OUTPUT"
+        fi
