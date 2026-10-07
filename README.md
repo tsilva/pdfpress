@@ -1,8 +1,10 @@
-<div align="center">
+<p align="center">
   <img src="./logo.png" alt="pdfpress" width="420" />
-
-  **🔧 Compress, merge, split, and unlock PDF files with one tool ⚡**
-</div>
+  <br />
+  <!-- repo-tagline:start -->
+  <strong>🔧 Compress, merge, split, and unlock PDF files with one tool ⚡</strong>
+  <!-- repo-tagline:end -->
+</p>
 
 pdfpress is a Python command-line toolkit for everyday PDF maintenance. Use it to shrink large PDFs, combine files, extract selected pages, or remove password protection from encrypted PDFs you can open.
 
