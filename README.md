@@ -59,7 +59,7 @@ mypy src/                                      # type-check source
 
 ## Notes
 
-- Python 3.10 or newer is required.
+- Python 3.11 or newer is required.
 - Ghostscript (`gs`) must be installed on the system for `pdfpress compress`.
 - Compression tries pikepdf, Ghostscript, and a combined strategy, then keeps the smallest successful output.
 - Batch compression can use multiple processes with `--jobs`; use `--jobs 1` for sequential processing.
